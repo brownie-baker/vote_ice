@@ -7,8 +7,8 @@ const FinalVoteSection = ({ iceCount, hotCount, onSubmit }) => {
     <Section>
       <Stack spacing={4} alignItems="center">
         <FinalVoteCard 
-          title="최종제출하기" 
-          body={`아이스 ${iceCount}잔 / 따뜻한 ${hotCount}잔`}
+          title={`아이스 ${iceCount}잔 / 따뜻한 ${hotCount}잔`}
+          body="최종제출하기"
           onClick={onSubmit}
         />
       </Stack>

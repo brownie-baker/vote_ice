@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Box, Typography, Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -7,6 +7,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 const WaterCard = ({ title, number, backgroundColor = '#f5f5f5', ...props }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [isPressed, setIsPressed] = useState(false);
   
   // title이 배열인지 확인하고, 문자열이면 배열로 변환
   const titleLines = Array.isArray(title) ? title : [title];
@@ -22,7 +23,9 @@ const WaterCard = ({ title, number, backgroundColor = '#f5f5f5', ...props }) => 
         borderRadius: '16px',
         backgroundColor: backgroundColor,
         padding: '24px',
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+        boxShadow: isPressed 
+          ? '0px 0px 20px rgba(255, 255, 255, 0.8), 0px 0px 30px rgba(255, 255, 255, 0.6)' 
+          : '0px 4px 12px rgba(0, 0, 0, 0.1)',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -30,12 +33,21 @@ const WaterCard = ({ title, number, backgroundColor = '#f5f5f5', ...props }) => 
         transition: 'transform 0.2s, box-shadow 0.2s',
         position: 'relative',
         overflow: 'hidden',
+        transform: isPressed ? 'scale(0.95)' : 'scale(1)',
         '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.15)',
+          transform: isPressed ? 'scale(0.95)' : 'translateY(-4px)',
+          boxShadow: isPressed 
+            ? '0px 0px 20px rgba(255, 255, 255, 0.8), 0px 0px 30px rgba(255, 255, 255, 0.6)' 
+            : '0px 8px 16px rgba(0, 0, 0, 0.15)',
         },
         ...props.sx
       }}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
+      onTouchStart={() => setIsPressed(true)}
+      onTouchEnd={() => setIsPressed(false)}
+      onClick={props.onClick}
       {...props}
     >
       {/* 카드 내용 */}

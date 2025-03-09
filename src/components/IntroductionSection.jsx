@@ -9,9 +9,8 @@ const IntroductionSection = () => {
           오늘 당신의 음료는? 
         </Typography>
         <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textAlign: 'center' }}>
-        아이스 / 따뜻한 음료 중에 투표해주세요!
+          아이스 / 따뜻한 음료 중에 투표해주세요!
         </Typography>
-
       </Stack>
     </Section>
   );
